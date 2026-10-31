@@ -1,0 +1,81 @@
+GATEWAY-R2#show running-config
+Building configuration...
+
+Current configuration : 749 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname GATEWAY-R2
+!
+!
+!
+!
+!
+!
+!
+!
+no ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface FastEthernet0/0
+ ip address 192.168.1.2 255.255.255.0
+ ip nat inside
+ duplex auto
+ speed auto
+ standby 1 ip 192.168.1.100
+ standby 1 preempt
+!
+interface FastEthernet0/1
+ ip address dhcp
+ ip nat outside
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip nat inside source list 1 interface FastEthernet0/1 overload
+ip classless
+!
+ip flow-export version 9
+!
+!
+access-list 1 permit 192.168.1.0 0.0.0.255
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end

@@ -1,0 +1,87 @@
+ISP#show running-config
+Building configuration...
+
+Current configuration : 788 bytes
+!
+version 12.4
+no service timestamps log datetime msec
+no service timestamps debug datetime msec
+no service password-encryption
+!
+hostname ISP
+!
+!
+!
+!
+!
+ip dhcp pool CUST-1
+ network 100.1.1.0 255.255.255.0
+ default-router 100.1.1.1
+ip dhcp pool CUST-2
+ network 200.1.1.0 255.255.255.0
+ default-router 200.1.1.1
+!
+!
+!
+ip cef
+no ipv6 cef
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+spanning-tree mode pvst
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 8.8.8.8 255.255.255.255
+!
+interface FastEthernet0/0
+ ip address 100.1.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface FastEthernet0/1
+ ip address 200.1.1.1 255.255.255.0
+ duplex auto
+ speed auto
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+ip classless
+!
+ip flow-export version 9
+!
+!
+!
+!
+!
+!
+!
+!
+line con 0
+!
+line aux 0
+!
+line vty 0 4
+ login
+!
+!
+!
+end
+
+
+ISP#
